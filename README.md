@@ -2,6 +2,8 @@
 
 A React Library to enable draglines for perfect placement of draggable items
 
+You can check the demo [here](https://karrthikreddychinasani.github.io/react-drag-guide-lines/)
+
 ## Usage
 
 using npm
