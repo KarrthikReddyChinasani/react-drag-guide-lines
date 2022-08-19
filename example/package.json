@@ -1,0 +1,21 @@
+{
+  "name": "example",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "rm -rf .parcel-cache && parcel src/index.html"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "parcel": "^2.7.0",
+    "process": "^0.11.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-rnd": "^10.3.7",
+    "uniqolor": "^1.0.2"
+  },
+  "dependencies": {
+    "react-drag-guide-lines-test": "^1.0.0"
+  }
+}
