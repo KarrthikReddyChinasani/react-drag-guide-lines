@@ -45,7 +45,7 @@ const App = () => {
                         color: colorData?.color,
                     }}
                 >
-                    React Drag Align Lines
+                    React Drag Guide Lines
                 </span>
                 <button
                     onClick={handleNewCard}
