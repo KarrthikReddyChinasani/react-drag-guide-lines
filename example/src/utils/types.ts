@@ -1,5 +1,5 @@
 import React from 'react'
-import { IDragOperations } from 'react-drag-guide-lines-test'
+import { IDragOperations } from 'react-drag-guide-lines'
 
 export interface ICardItemProps {
   id: string

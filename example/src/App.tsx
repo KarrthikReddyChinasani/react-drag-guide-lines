@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { ReactAlignLinesContainer } from 'react-drag-guide-lines-test'
+import { ReactAlignLinesContainer } from 'react-drag-guide-lines'
 import uniqolor from 'uniqolor'
 import Card from './card'
 import { positions } from './utils/constants'
