@@ -1,11 +1,19 @@
-# React drag lines [Github](https://github.com/KarrthikReddyChinasani/react-drag-align)
+# React drag guide lines
 
 A React Library to enable draglines for perfect placement of draggable items
 
 ## Usage
 
+using npm
+
 ```bash
-npm i -S react-drag-lines
+npm i -S react-drag-guide-lines
+```
+
+using yarn
+
+```bash
+yarn add -S react-drag-guide-lines
 ```
 
 ### Parent Component
@@ -15,7 +23,7 @@ Add the following import to your parent component
 #### Parent import
 
 ```tsx
-import ReactDragAlign from 'react-drag-lines';
+import { ReactAlignLinesContainer } from 'react-drag-guide-lines';
 ```
 
 #### Parent code
@@ -24,9 +32,9 @@ instead of your parent you can wrap your draggable children with the following c
 
 ```tsx
 return (
-  <ReactDragAlign styles={{...yourprops}}>
+  <ReactAlignLinesContainer styles={{...yourprops}}>
     {draggableComponents.map(item => <YourComponent {...props}>)}
-  </ReactDragAlign>
+  </ReactAlignLinesContainer>
 )
 ```
 
@@ -68,17 +76,17 @@ Styles required to pass from parent for different styles like backgroundColor, w
 #### import
 
 ```tsx
-import { IDragOperations } from 'react-drag-lines';
+import { IDragOperations } from 'react-drag-guide-lines';
 ```
 
 #### Props
 
-to your props you can add a new Prop with `IDragOperations`
+to your props you can add a new Prop dragOperations with `IDragOperations` as type
 
 ```tsx
 interface IChildProps {
   // your props
-  dragOperations: IDragOperations
+  dragOperations?: IDragOperations
 }
 ```
 
@@ -121,3 +129,9 @@ const ChildComponent = (props: IChildProps) => {
 
 export default ChildComponent;
 ```
+
+<center>
+
+![Made with love in India](https://madewithlove.now.sh/in?template=flat-square)
+
+</center>
