@@ -47,3 +47,5 @@ export interface IDragOperations {
   onDragStart: () => void
   onDragStop: () => void
 }
+
+export type Directions = 'tt' | 'bb' | 'll' | 'rr' | 'hc' | 'wc' | 'lr' | 'rl' | 'tb' | 'bt'

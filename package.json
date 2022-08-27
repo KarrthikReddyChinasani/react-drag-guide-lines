@@ -1,6 +1,6 @@
 {
   "name": "react-drag-guide-lines",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Adds guide lines to react draggable components",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",

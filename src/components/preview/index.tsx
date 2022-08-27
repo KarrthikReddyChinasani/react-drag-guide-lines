@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode, useMemo, useState } from 'react'
-import { calcLineValues, calcPosValues, unique } from '../../common/utils'
-import { ICoordinates, IDragLineMeta, IDragOperations, ILineMeta } from '../../common/types'
+import { ALL_DIRECTIONS, calcLineValues, calcPosValues, unique } from '../../common/utils'
+import { Directions, ICoordinates, IDragLineMeta, IDragOperations, ILineMeta } from '../../common/types'
 import DragLines from '../drag-lines'
 
 interface IPreviewProps {
@@ -11,6 +11,7 @@ interface IPreviewProps {
     xLineStyle?: React.CSSProperties
     yLineStyle?: React.CSSProperties
   }
+  directions?: Directions[]
 }
 
 const Preview = (props: IPreviewProps) => {
@@ -32,8 +33,10 @@ const Preview = (props: IPreviewProps) => {
     })
   }
 
+  const { children, styles, directions = ALL_DIRECTIONS, limit } = props
+
   const init = () => {
-    dragLines.current = props.children.map((_child, i) => {
+    dragLines.current = children.map((_child, i) => {
       const currentEle = parentRef?.current?.childNodes[i] as HTMLDivElement
       const x = Number(currentEle?.getAttribute('data-x'))
       const y = Number(currentEle?.getAttribute('data-y'))
@@ -88,8 +91,16 @@ const Preview = (props: IPreviewProps) => {
   }
 
   const calcAndDrawLines = (values: ICoordinates, target: IDragLineMeta, compares: IDragLineMeta[]) => {
-    const { v: x, indices: indices_x, lines: vLines } = calcPosValues(values, target, compares, 'x')
-    const { v: y, indices: indices_y, lines: hLines } = calcPosValues(values, target, compares, 'y')
+    const {
+      v: x,
+      indices: indices_x,
+      lines: vLines,
+    } = calcPosValues(values, target, compares, 'x', directions as string[])
+    const {
+      v: y,
+      indices: indices_y,
+      lines: hLines,
+    } = calcPosValues(values, target, compares, 'y', directions as string[])
 
     const indices = unique(indices_x.concat(indices_y as number[]))
 
@@ -124,7 +135,7 @@ const Preview = (props: IPreviewProps) => {
       const target = dragLines.current[index]
       const compares = dragLines.current.filter((_: IDragLineMeta, i: number) => i !== index)
 
-      if (props.limit && parentRef?.current) {
+      if (limit && parentRef?.current) {
         const { limitX, limitY } = checkDragOut({ x, y }, target)
         x = limitX
         y = limitY
@@ -149,8 +160,6 @@ const Preview = (props: IPreviewProps) => {
       reset()
     },
   })
-
-  const { children, styles } = props
 
   const wrapperStyle = useMemo(() => {
     const wrapper: React.CSSProperties = {
