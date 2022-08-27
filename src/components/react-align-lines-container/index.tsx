@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+import { Directions } from '../../common/types'
 import Preview from '../preview'
 
 interface IReactAlignLinesContainerProps {
@@ -11,12 +12,13 @@ interface IReactAlignLinesContainerProps {
     xLineStyle?: React.CSSProperties
     yLineStyle?: React.CSSProperties
   }
+  directions?: Directions[]
 }
 
 const ReactAlignLinesContainer = (props: IReactAlignLinesContainerProps) => {
   const { emptyState, showEmptyState, ...rest } = props
 
-  if (showEmptyState) {
+  if (showEmptyState || props?.children?.length === 0) {
     return (
       <div
         style={{

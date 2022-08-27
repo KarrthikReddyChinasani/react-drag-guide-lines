@@ -1,12 +1,12 @@
 import { ICoordinates, IDragLineMeta, ILineMeta } from '../types'
 
-const allDirections = ['tt', 'bb', 'll', 'rr', 'tb', 'lr']
+export const ALL_DIRECTIONS = ['tt', 'bb', 'll', 'rr', 'hc', 'wc', 'lr', 'rl', 'tb', 'bt']
 const threshold = 5
 
 /**
  * made it generic for future use. Cannot remove any
  * */
-export function unique(array: any[], compare = (a: any, b: any) => a === b) {
+export function unique(array: number[], compare = (a: number, b: number) => a === b) {
   const result = []
   for (let i = 0, len = array.length; i < len; i++) {
     const current = array[i]
@@ -74,13 +74,21 @@ const calcPosValuesSingle = (
   }
 
   switch (dire) {
-    case 'lr':
+    case 'wc':
       result.dist = x + W / 2 - lr
       result.value = lr
       break
     case 'll':
       result.dist = x - l
       result.value = l
+      break
+    case 'rl':
+      result.dist = x + W - l
+      result.value = l
+      break
+    case 'lr':
+      result.dist = r - x
+      result.value = r
       break
     case 'rr':
       result.dist = x + W - r
@@ -90,11 +98,19 @@ const calcPosValuesSingle = (
       result.dist = y - t
       result.value = t
       break
+    case 'tb':
+      result.dist = y - b
+      result.value = b
+      break
+    case 'bt':
+      result.dist = y + H - t
+      result.value = t
+      break
     case 'bb':
       result.dist = y + H - b
       result.value = b
       break
-    case 'tb':
+    case 'hc':
       result.dist = y + H / 2 - tb
       result.value = tb
       break
@@ -112,16 +128,17 @@ export const calcPosValues = (
   target: IDragLineMeta,
   compares: IDragLineMeta[],
   key: 'x' | 'y',
+  allowedDirections: string[],
 ) => {
   const results = {}
 
   const directions = {
-    x: ['ll', 'rr', 'lr'],
-    y: ['tt', 'bb', 'tb'],
+    x: ['ll', 'rr', 'wc', 'rl', 'lr'],
+    y: ['tt', 'bb', 'hc', 'tb', 'bt'],
   }
 
   // filter unnecessary directions
-  const validDirections = directions[key].filter((dire) => allDirections.includes(dire))
+  const validDirections = directions[key].filter((dire) => allowedDirections.includes(dire))
 
   compares.forEach((compare: IDragLineMeta) => {
     validDirections.forEach((dire) => {
